@@ -1,0 +1,50 @@
+ALGORITHM automate
+VAR
+    state : INTEGER;
+    c : CHAR;
+BEGIN
+    WHILE (state <> 4 and state <> 5) DO    
+    Read(c);
+        SWITCH (state) DO
+            case 0 :
+                IF (isDigit(c)) THEN
+                    state := 1;
+                ELSE_IF( c = '') THEN
+                    state := 0
+                ELSE
+                    state := 5;
+                END_IF
+                break;
+            case 1 : 
+                IF (isDigit(c)) THEN
+                    state := 1
+                ELSE_IF (c = '.') THEN
+                    state := 2
+                ELSE_IF (c = '#') THEN
+                    state := 4
+                ELSE
+                    state := 5
+                break;
+            case 2 :
+                IF (isDigit(c)) THEN
+                    state := 3;
+                ELSE
+                    state := 5;
+                END_IF
+                break;
+            case 3 :
+                IF (isDigit(c)) THEN
+                    state := 3
+                ELSE_IF (c = '#') THEN
+                    state := 4
+                ELSE
+                    state := 5
+                break;
+            case 4 :
+                Write("A valide expression")
+                break;
+            case 5 :
+                Write("Not a valid expression")
+        END_SWITCH
+    END_WHILE
+END

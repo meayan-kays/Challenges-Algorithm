@@ -1,0 +1,22 @@
+PROCEDURE permutation(VAR x : INTEGER, VAR y : INTEGER, VAR z : INTEGER)
+VAR
+    temp : INTEGER
+BEGIN
+    temp := x;
+    x := y;
+    y := z;
+    z := temp;
+END
+
+ALGORITHM circule_permutation
+VAR
+    x, y, z : INTEGER;
+BEGIN
+    Read(x);
+    Read(y);
+    Read(z);
+    permutation(x,y,z);
+    Write("new X = ",x);
+    Write("new y = ",y);
+    Write("new Z = ",z);
+END

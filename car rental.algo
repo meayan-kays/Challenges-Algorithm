@@ -1,0 +1,53 @@
+FUNCTION kilometers_rental(r1 : FLOAT, r2 : FLOAT, r3 : FLOAT, VAT : FLOAT,  nbKms : INTEGER) : FLOAT
+VAR
+    kilometersCost ,cost : FLOAT;
+BEGIN
+    if(nbKms <= 100){
+        cost = r1 * nbKms;
+        kilometersCost = cost + cost * VAT;
+    }
+    if(nbKms > 100 && nbKms <= 1000){
+        cost = r2 * (nbKms - 100) + (r1 * 100) ;
+        kilometersCost = cost + cost * VAT;
+    }
+    if(nbKms > 1000){
+        cost = r3 * (nbKms-1000) + (r2 * 900) + (r1 * 100);
+        kilometersCost = cost + cost * VAT;
+    }
+    RETURN kilometersCost   
+END
+
+FUNCTION dayly_rental(p_d : FLOAT, ins : FLOAT, VAT : FLOAT, nbDays: INTEGER) : FLOAT
+VAR
+    daylyCost ,cost : FLOAT;
+BEGIN
+    cost = (p_d + ins) * nbDays;
+    daysCost = cost + cost * VAT;
+    RETURN  daylyCost;
+END
+
+PROCEDURE suitible_rental(kilometerRental : FLOAT, daylyRental : FLOAT);
+VAR
+BEGIN
+    IF (kilometerRental < daylyRental) THEN
+        Write("Kilometer rental is better than Dayly rental")
+    ELSE
+        Write("Dayly rental is better than Kilometer rental")
+    END_IF
+END
+
+ALGORITHM car_rental
+VAR
+    nbKms, nbDays : INTEGER;
+    r1, r2, r3, ins, VAT, p_d, kilometerRental, dayly_rental : FLOAT;
+BEGIN
+    Write("Number of kilometers covered during the rental : ");
+    Read(nbKms);
+    kilometerRental = kilometers_rental(r1,r2,r3,VAT, nbKms);
+
+    Write("Number of days during the rental : ");
+    Read(nbDays);
+    daylyRental = dayly_rental(p_d,ins,VAT,nbDays);
+
+    suitible_rental(kilometerRental, daylyRental);
+END
